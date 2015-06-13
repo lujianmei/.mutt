@@ -1,0 +1,63 @@
+[general]
+ui = TTYUI
+accounts = TRS
+pythonfile = ~/.mutt/source/offlineimap.py
+fsync = False
+
+[Account TRS]
+localrepository = TRS-Local
+remoterepository = TRS-Remote
+status_backend = sqlite
+postsynchook = notmuch new
+# Minutes between syncs
+autorefresh = 5
+# Number of quick-syncs between autorefreshes. Quick-syncs do not update if the
+# only changes were to IMAP flags
+quick = 10
+
+[Repository TRS-Local]
+type = Maildir
+localfolders = ~/.mutt/mails/lu.jianmei
+nametrans = lambda folder : {'drafts':   '[TRS]/Drafts',
+                            'inbox':     '[TRS]/Inbox',
+                            'sent':     '[TRS]/Sent Mail',
+#                            'flagged':  '[TRS]/Starred',
+                            'trs':  '[TRS]/trs',
+                            'haier':  '[TRS]/haier',
+                            'pm':  '[TRS]/pm',
+#                            'trash':    '[TRS]/Bin',
+                            'archive':  '[TRS]/All Mail',
+                           }.get(folder, folder)
+
+[Repository TRS-Remote]
+sslcacertfile=/etc/ssl/certs/ca-certificates.crt
+maxconnections = 1
+type = IMAP
+remotehost = imap.qiye.163.com
+remoteuser = lu.jianmei@trs.com.cn
+remoteport = 993
+remotepasseval = get_gpg_pass(keyfile="~/.mutt/.my-pwds.gpg")
+realdelete = no
+startdate = 2015-04-01
+nametrans = lambda folder : {'[TRS]/Drafts':     'drafts',
+                            '[TRS]/Inbox':  'inbox',
+                            '[TRS]/Sent Mail':  'sent',
+#                            '[TRS]/Starred':    'flagged',
+                            '[TRS]/TRS':    'trs',
+#                            '[TRS]/haier':    'haier',
+                            '[TRS]/pm':    'pm',
+#                            '[TRS]/Bin':        'trash',
+                            '[TRS]/All Mail':   'archive',
+                           }.get(folder, folder)
+folderfilter = lambda folder: folder not in ['[TRS]/Bin', '[TRS]/Spam','[TRS]/akamai','[TRS]/errors','[TRS]/me','[TRS]/nagios']
+# Instead of closing the connection once a sync is complete, offlineimap will
+# send empty data to the server to hold the connection open. A value of 60
+# attempts to hold the connection for a minute between syncs (both quick and
+# autorefresh).This setting has no effect if autorefresh and holdconnectionopen
+# are not both set.
+keepalive = 60
+# OfflineIMAP normally closes IMAP server connections between refreshes if
+# the global option autorefresh is specified.  If you wish it to keep the
+# connection open, set this to true. This setting has no effect if autorefresh
+# is not set.
+holdconnectionopen = yes
