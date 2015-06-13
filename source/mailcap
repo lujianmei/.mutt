@@ -1,0 +1,28 @@
+# Images
+image/*; ristretto %s
+
+# PDFs
+application/pdf; okular %s
+
+# HTML
+text/html; w3m -I %{charset} -dump %s; nametemplate=%s.html; copiousoutput
+#text/html; chromium %s
+
+# GPG
+application/pgp-encrypted; gpg --decrypt; copiousoutput
+
+#word
+application/msword; catdoc %s
+application/octet-stream; et  %s
+application/octet-stream; wpp  %s
+application/octet-stream; wps  %s
+application/*; xdg-open  %s
+
+text/*; emacsclient -c %s
+video/*; xdg-open %s
+audio/*; xdg-open %s
+
+#archive
+application/x-rar; xarchiver %s
+application/x-zip; xarchiver %s
+application/x-tar; xarchiver %s
