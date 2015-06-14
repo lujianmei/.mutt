@@ -17,16 +17,16 @@ quick = 10
 
 [Repository TRS-Local]
 type = Maildir
-localfolders = ~/.mutt/mails/lu.jianmei
-nametrans = lambda folder : {'drafts':   '[TRS]/Drafts',
-                            'inbox':     '[TRS]/Inbox',
-                            'sent':     '[TRS]/Sent Mail',
+localfolders = ~/.mutt/mails/lu.jianmei/
+nametrans = lambda folder : {'drafts':   'Mail/Drafts',
+                            'inbox':     'Mail/Inbox',
+                            'sent':     'Mail/Sent Mail',
 #                            'flagged':  '[TRS]/Starred',
-                            'trs':  '[TRS]/trs',
-                            'haier':  '[TRS]/haier',
-                            'pm':  '[TRS]/pm',
+                            'trs':  'Mail/trs',
+                            'haier':  'Mail/haier',
+                            'pm':  'Mail/pm',
 #                            'trash':    '[TRS]/Bin',
-                            'archive':  '[TRS]/All Mail',
+                            'archive':  'Mail/All Mail',
                            }.get(folder, folder)
 
 [Repository TRS-Remote]
@@ -34,24 +34,27 @@ sslcacertfile=/etc/ssl/certs/ca-certificates.crt
 maxconnections = 2
 type = IMAP
 #auth = on
+#ssl = yes
+reference = Mail
 remotehost = imap.qiye.163.com
 remoteuser = lu.jianmei@trs.com.cn
 #remoteport = 993
-remotepass = ljm_07102049610
-remotepasseval = get_gpg_pass(keyfile="/home/kevin/.mutt/.my-pwds.gpg")
+
+#remotepasseval = get_gpg_pass(keyfile="/home/kevin/.mutt/.my-pwds.gpg")
 realdelete = no
 startdate = 2015-04-01
-nametrans = lambda folder : {'[TRS]/Drafts':     'drafts',
-                            '[TRS]/Inbox':  'inbox',
-                            '[TRS]/Sent Mail':  'sent',
+nametrans = lambda folder : {'Mail/Drafts':     'drafts',
+                            'Mail/Inbox':  'inbox',
+                            'Mail/Sent':  'sent',
 #                            '[TRS]/Starred':    'flagged',
-                            '[TRS]/TRS':    'trs',
-#                            '[TRS]/haier':    'haier',
-                            '[TRS]/pm':    'pm',
-#                            '[TRS]/Bin':        'trash',
-                            '[TRS]/All Mail':   'archive',
+                            'Mail/TRS':    'trs',
+                            'Mail/haier':    'haier',
+                            'Mail/pm':    'pm',
+                            'Mail/Bin':        'trash',
+                            'Mail/All Mail':   'archive',
                            }.get(folder, folder)
-folderfilter = lambda folder: folder not in ['[TRS]/Bin', '[TRS]/Spam','[TRS]/akamai','[TRS]/errors','[TRS]/me','[TRS]/nagios']
+#folderfilter = lambda folder: folder not in ['/Bin', '/Spam','[TRS]/akamai','[TRS]/errors','[TRS]/me','[TRS]/nagios']
+folderfilter = lambda folder: folder in ['Mail/Inbox','Mail/Sent','Mail/Drafts', 'Mail/trs','Mail/haier','Mail/pm']
 # Instead of closing the connection once a sync is complete, offlineimap will
 # send empty data to the server to hold the connection open. A value of 60
 # attempts to hold the connection for a minute between syncs (both quick and
