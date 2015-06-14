@@ -33,6 +33,7 @@ mailboxes +lu.jianmei/INBOX \
 set mbox      = "+lu.jianmei/archive"
 set postponed = "+lu.jianmei/drafts"
 set record    = "+lu.jianmei/sent"
+my_hdr bcc:lu.jianmei@trs.com.cn
 
 # Basic Options --------------------------------------
 set wait_key = no        # don't prompt for <enter> so much
@@ -48,6 +49,26 @@ set beep_new             # bell on new mails
 set pipe_decode          # strip headers and eval mimes when piping
 set thorough_search      # strip headers and eval mimes before searching
 set markers = no
+set sleep_time = 0       # speed up when swich folder
+
+
+# Basic Encoding setting -----------------------------------
+# 终端的编码
+set charset="UTF-8"
+# 外发邮件使用的编码
+set send_charset="UTF-8"
+# 用中文格式显示日期
+set locale="zh_CN.UTF-8"
+# 解决没有设置字符编码的信件显示为乱码的问题
+charset-hook ^us-ascii$ gb2312
+# 解决主题为utf-8的信件标题显示为乱码的问题
+charset-hook !UTF-8 gb2312
+# 解决未经过MIME编码的信件显示为乱码的问题
+#set strict_mime=no
+set assumed_charset="gb2312"
+# 解决中文附件名为乱码的问题
+set rfc2047_parameters=yes
+
 
 # Use abook instead of aliases
 set query_command = "abook --datafile ~/.mutt/.abook/trsaddressbook --mutt-query '%s'"
@@ -74,7 +95,7 @@ bind index ?       search-opposite
 bind index <space> collapse-thread
 macro index a "<limit>all\n" "show all messages (undo limit)"
 macro index O "<shell-escape>offlineimap<enter>" "sync all mailboxes"
-macro index o "<shell-escape>offlineimap -qf 'INBOX,[TRS]/All Mail,[TRS]/Sent Mail,[TRS]/Drafts,[TRS]/haier,[TRS]/trs,[TRS]/pm'<enter>" "sync core mailboxes"
+macro index o "<shell-escape>offlineimap -qf 'INBOX,Sent,Drafts,haier,trs,pm'<enter>" "sync core mailboxes"
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 macro index gi "<change-folder>=lu.jianmei/INBOX<enter>" "Go to Inbox"
@@ -82,7 +103,6 @@ macro index ga "<change-folder>=lu.jianmei/archive<enter>" "Go to All Mail"
 macro index gt "<change-folder>=lu.jianmei/trs<enter>" "Go to trs"
 macro index gp "<change-folder>=lu.jianmei/pm<enter>" "Go to pm"
 macro index gh "<change-folder>=lu.jianmei/haier<enter>" "Go to Haier"
-macro index gm "<change-folder>=lu.jianmei/haier<enter>" "Go to Haier"
 macro index gs "<change-folder>=lu.jianmei/sent<enter>" "Go to Sent Mail"
 macro index gd "<change-folder>=lu.jianmei/drafts<enter>" "Go to Drafts"
 macro index S "<enter-command>unset wait_key<enter><shell-escape>~/.mutt/source/mutt-notmuch-py -G ~/.mutt/mail/.tmp/search<enter><change-folder-readonly>+.tmp/search<enter>" "search mail (using notmuch)"

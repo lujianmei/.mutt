@@ -1,3 +1,6 @@
+# Solve encode issue
+text/plain; iconv -f gbk -t utf-8 %s; test=echo "%{charset}" | grep -ic "gb2312"; copiousoutput;
+
 # Images
 image/*; ristretto %s
 
@@ -18,7 +21,7 @@ application/octet-stream; wpp  %s
 application/octet-stream; wps  %s
 application/*; xdg-open  %s
 
-text/*; emacsclient -c %s
+#text/*; emacsclient -c %s
 video/*; xdg-open %s
 audio/*; xdg-open %s
 
