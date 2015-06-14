@@ -1,4 +1,6 @@
+.msmtp.log
 .my-pwds.gpg
 /cache/
 /.cache/
 /mails/
+/.abook/trsaddressbook

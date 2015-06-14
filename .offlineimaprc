@@ -31,12 +31,14 @@ nametrans = lambda folder : {'drafts':   '[TRS]/Drafts',
 
 [Repository TRS-Remote]
 sslcacertfile=/etc/ssl/certs/ca-certificates.crt
-maxconnections = 1
+maxconnections = 2
 type = IMAP
+#auth = on
 remotehost = imap.qiye.163.com
 remoteuser = lu.jianmei@trs.com.cn
-remoteport = 993
-remotepasseval = get_gpg_pass(keyfile="~/.mutt/.my-pwds.gpg")
+#remoteport = 993
+remotepass = ljm_07102049610
+remotepasseval = get_gpg_pass(keyfile="/home/kevin/.mutt/.my-pwds.gpg")
 realdelete = no
 startdate = 2015-04-01
 nametrans = lambda folder : {'[TRS]/Drafts':     'drafts',

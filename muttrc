@@ -9,9 +9,9 @@ set mailcap_path     = ~/.mutt/source/mailcap         # entries for filetypes
 set signature        = ~/.mutt/source/TRSSig             # my signature file
 
 # Aliases --------------------------------------------
-set sort_alias = alias
-set reverse_alias = yes
-source $alias_file
+#set sort_alias = alias
+#set reverse_alias = yes
+#source $alias_file
 
 # Account Settings -----------------------------------
 # Default inbox.
@@ -50,7 +50,7 @@ set thorough_search      # strip headers and eval mimes before searching
 set markers = no
 
 # Use abook instead of aliases
-set query_command = "abook --mutt-query '%s'"
+set query_command = "abook --datafile ~/.mutt/.abook/trsaddressbook --mutt-query '%s'"
 macro generic,index,pager \ca "<shell-escape>abook<return>" "launch abook"
 macro index,pager A "<pipe-message>abook --add-email<return>" "add sender to address book"
 bind editor <tab> complete-query
@@ -140,8 +140,8 @@ set forward_quote                    # include message in forwards
 
 # Editor ----------------------------------------------
 #set editor='vim + -c "set nocp" -c "set textwidth=72" -c "set wrap" -c "silent /^$" -c "noh" -c "vmap <leader>s c[... snip ...]<ESC>"
-#set editor='emacsclient'
-set editor="emacsclient -a \"\" -t"
+set editor='emacsclient'
+#set editor="emacsclient -a \"\" -t"
 
 # Send Options ---------------------------------------
 set from          = "lu.jianmei@trs.com.cn"
