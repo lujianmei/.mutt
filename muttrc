@@ -105,7 +105,7 @@ macro index gp "<change-folder>=lu.jianmei/pm<enter>" "Go to pm"
 macro index gh "<change-folder>=lu.jianmei/haier<enter>" "Go to Haier"
 macro index gs "<change-folder>=lu.jianmei/sent<enter>" "Go to Sent Mail"
 macro index gd "<change-folder>=lu.jianmei/drafts<enter>" "Go to Drafts"
-macro index S "<enter-command>unset wait_key<enter><shell-escape>~/.mutt/source/mutt-notmuch-py -G ~/.mutt/mail/.tmp/search<enter><change-folder-readonly>+.tmp/search<enter>" "search mail (using notmuch)"
+macro index S "<enter-command>unset wait_key<enter><shell-escape>~/.mutt/source/mutt-notmuch-py -G ~/.mutt/mails/.tmp/search<enter><change-folder-readonly>+.tmp/search<enter>" "search mail (using notmuch)"
 
 # Pager View Options ---------------------------------
 set pager_index_lines = 10 # number of index lines to show
