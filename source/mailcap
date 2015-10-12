@@ -2,7 +2,8 @@
 text/plain; iconv -f gbk -t utf-8 %s; test=echo "%{charset}" | grep -ic "gb2312"; copiousoutput;
 
 # Images
-image/*; ristretto %s
+#image/*; ristretto %s
+image/*; ~/.mutt/source/muttimage.sh %s ; copiousoutput
 
 # PDFs
 application/pdf; okular %s
