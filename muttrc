@@ -1,9 +1,9 @@
 # Paths ----------------------------------------------
-set folder           = ~/.mutt/mails                  # mailbox location
+set folder           = ~/Maildir                  # mailbox location
 set alias_file       = ~/.mutt/source/aliases         # where to store aliases
-set header_cache     = ~/.mutt/.cache/headers   # where to store headers
-set message_cachedir = ~/.mutt/.cache/bodies    # where to store bodies
-set tmpdir           = ~/.mutt/.cache/temp      # where to keep temp files
+set header_cache     = ~/Maildir/lu.jianmei/.cache/headers   # where to store headers
+set message_cachedir = ~/Maildir/lu.jianmei/.cache/bodies    # where to store bodies
+set tmpdir           = ~/Maildir/lu.jianmei/.cache/temp      # where to keep temp files
 set certificate_file = ~/.mutt/source/certificates    # where to store certs
 set mailcap_path     = ~/.mutt/source/mailcap         # entries for filetypes
 set signature        = ~/.mutt/source/TRSSig             # my signature file
@@ -15,7 +15,7 @@ set signature        = ~/.mutt/source/TRSSig             # my signature file
 
 # Account Settings -----------------------------------
 # Default inbox.
-set spoolfile = "+lu.jianmei/haier"
+set spoolfile = "+lu.jianmei/trs"
 
 # Alternate email addresses.
 alternates lu.jianmei@trs.com.cn
@@ -26,13 +26,14 @@ mailboxes +lu.jianmei/INBOX \
           +lu.jianmei/haier \
           +lu.jianmei/pm \
           +lu.jianmei/archive \
-          +lu.jianmei/sent \
-          +lu.jianmei/drafts \
+          +lu.jianmei/已发送 \
+          +lu.jianmei/已删除 \
+          +lu.jianmei/草稿箱 \
 
 # Other special folders.
 set mbox      = "+lu.jianmei/archive"
-set postponed = "+lu.jianmei/drafts"
-set record    = "+lu.jianmei/sent"
+set postponed = "+lu.jianmei/草稿箱"
+set record    = "+lu.jianmei/已发送"
 my_hdr bcc:lu.jianmei@trs.com.cn
 
 # Basic Options --------------------------------------
@@ -103,9 +104,10 @@ macro index ga "<change-folder>=lu.jianmei/archive<enter>" "Go to All Mail"
 macro index gt "<change-folder>=lu.jianmei/trs<enter>" "Go to trs"
 macro index gp "<change-folder>=lu.jianmei/pm<enter>" "Go to pm"
 macro index gh "<change-folder>=lu.jianmei/haier<enter>" "Go to Haier"
-macro index gs "<change-folder>=lu.jianmei/sent<enter>" "Go to Sent Mail"
-macro index gd "<change-folder>=lu.jianmei/drafts<enter>" "Go to Drafts"
-macro index S "<enter-command>unset wait_key<enter><shell-escape>~/.mutt/source/mutt-notmuch-py -G ~/.mutt/mails/.tmp/search<enter><change-folder-readonly>+.tmp/search<enter>" "search mail (using notmuch)"
+macro index gs "<change-folder>=lu.jianmei/已发送<enter>" "Go to Sent Mail"
+macro index gd "<change-folder>=lu.jianmei/草稿箱<enter>" "Go to Drafts"
+macro index gr "<change-folder>=lu.jianmei/已删除<enter>" "Go to Deleted"
+macro index S "<enter-command>unset wait_key<enter><shell-escape>~/.mutt/source/mutt-notmuch-py -G ~/Maildir/lu.jianmei/.tmp/search<enter><change-folder-readonly>+.tmp/search<enter>" "search mail (using notmuch)"
 
 # Pager View Options ---------------------------------
 set pager_index_lines = 10 # number of index lines to show
@@ -134,8 +136,8 @@ bind pager ?   search-opposite
 bind attach <return> view-mailcap # View attachments properly.
 macro pager \Cu "|urlview<enter>" "call urlview to open links"
 #This will either save automatically (E) to a given dir with a single keystrike, or (W) give you a default path to either confirm or expand and then to save.
-macro attach W <save-entry><kill-line>/home/kevin/attachments/
-macro attach E <save-entry><kill-line>/home/kevin/attachments/<enter>
+macro attach W <save-entry><kill-line>/Users/kevin/attachments/
+macro attach E <save-entry><kill-line>/Users/kevin/attachments/<enter>
 
 # Header Options -------------------------------------
 ignore *                                # ignore all headers
@@ -173,9 +175,8 @@ set editor='emacsclient'
 
 # Send Options ---------------------------------------
 set from          = "lu.jianmei@trs.com.cn"
-set sendmail      = "/usr/bin/msmtp -a trs"
+set sendmail      = "/usr/local/Cellar/msmtp/1.6.2/bin/msmtp -a trs"
 # check attachment before send
-#set sendmail = "~/.mutt/source/sendmail_wrapper.zsh /usr/bin/msmtp -a trs"
 set sendmail_wait = 1
 
 # Status Bar -----------------------------------------

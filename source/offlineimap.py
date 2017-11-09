@@ -17,7 +17,7 @@ def get_keychain_pass(account=None, server=None):
         'command': 'find-internet-password',
         'account': account,
         'server': server,
-        'keychain': '/Users/cbracken/Library/Keychains/login.keychain',
+        'keychain': '/Users/kevin/Library/Keychains/login.keychain',
     }
     command = "sudo -u cbracken %(security)s -v %(command)s -g -a %(account)s -s %(server)s %(keychain)s" % params
     output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT)
